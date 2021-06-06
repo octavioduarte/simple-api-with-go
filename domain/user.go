@@ -9,10 +9,14 @@ import (
 
 type User struct {
 	Base
-	Email    string
-	Name     string
-	Password string
-	Token    string
+	Email    string `json:"email" gorm:"type:varchar(255);unique_index"`
+	Name     string `json:"name"  gorm:"type:varchar(255)"`
+	Password string `json:"-"     gorm:"type:varchar(255);unique_index"`
+	Token    string `json:"token" gorm:"type:varchar(255)"`
+}
+
+func NewUser() *User {
+	return &User{}
 }
 
 func (user *User) Prepare() error {
